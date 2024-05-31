@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+       background-image:url("https://st3.depositphotos.com/30440304/34082/i/450/depositphotos_340825242-stock-photo-sophisticated-pretty-background-colorful-glow.jpg");
+        background-size:cover;
+        height:100vh;
+        background-repeat:no-repeat;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-image:url("https://t4.ftcdn.net/jpg/05/72/54/67/360_F_572546714_2mn39TUv2f5Lmg7JRT9yvSkuTJERGyg8.jpg");
+        background-size:cover;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        background-color: darkred;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+    }
+
+    li:last-child {
+        border-bottom: none;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: #888;
+    }
+
+    .delete {
+        background-color: darkblue;
+        margin-left: auto;
+    }
+
+    .delete:hover {
+        background-color: #cc0000;
+    }
+
+    .checkbox {
+        margin-right: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add new task...">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value.trim();
+        if (taskText !== '') {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <input type="checkbox" class="checkbox" onchange="toggleComplete(this)">
+                <span>${taskText}</span>
+                <button class="delete" onclick="deleteTask(this)">Delete</button>`;
+            document.getElementById('taskList').appendChild(li);
+            taskInput.value = '';
+        }
+    }
+
+    function deleteTask(element) {
+        element.parentElement.remove();
+    }
+
+    function toggleComplete(checkbox) {
+        const taskText = checkbox.nextElementSibling;
+        if (checkbox.checked) {
+            taskText.classList.add('completed');
+        } else {
+            taskText.classList.remove('completed');
+        }
+    }
+</script>
+
+</body>
+</html>
 
